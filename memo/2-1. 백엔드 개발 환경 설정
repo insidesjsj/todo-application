@@ -1,0 +1,20 @@
+2.1.6 메인메서드와 @SpringBootApplication
+@SpringBootApplication
+- 해당 클래스가 스프링 부트를 설정하는 클래스임을 의미
+- 스프링은 @SpringBootApplication 달린 클래스가 있는 패키지를 베이스 패키지로 간주
+
+@Component
+- 스프링에게 이 클래스를 자바 빈으로 등록시키라고 알려주는 어노테이션
+
+@ComponentScan
+- ComponentScan 어노테이션이 어떤 클래스에 있어야지만 컴포넌트를 스캐닝 할 수 있다.
+- 해당 프로젝트에서는 DemoApplication 클래스의 @SpringBootApplication이 이미 @ComponentScan을 포함하고 있어 굳이 추가하지 않았던 것.
+
+1. 스프링부트 애플리케이션 시작
+2. @ComponentScan 어노테이션이 있는 경우 베이스 패키지와 하위 패키지에서 @Component가 달린 클래스를 찾는다.
+3. 필요한 경우 @Component가 달린 클래스의 오브젝트를 생성. 
+3-a. @Autowired에 연결된 변수의 클래스가 @Component가 달린 클래스인 경우 스프링이 오브젝트를 생성해 넘겨준다.
+3-b. 만약 @Bean 어노테이션으로 생성하는 오브젝트인 경우 @Bean이 달린 메서드를 불러 생성해 넘겨준다.
+
+서버 포트 변경
+src - main - resources - application.properties -  server.port= 8053
