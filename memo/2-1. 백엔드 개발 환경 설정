@@ -17,4 +17,12 @@
 3-b. 만약 @Bean 어노테이션으로 생성하는 오브젝트인 경우 @Bean이 달린 메서드를 불러 생성해 넘겨준다.
 
 서버 포트 변경
-src - main - resources - application.properties -  server.port= 8053
+src - main - resources - application.properties - server.port = 8053
+
+2.1.7 빌드 자동화 툴 : Gradle과 라이브러리
+포스트맨 API 테스트
+- REST API 를 테스트하는 툴
+- REST API는 HTTP 메서드, 요청 매개변수 or 요청 바디로 구분
+- 이를 브라우저에서 테스팅 하는 것은 한계가 있음
+- 임시로 프론트엔드 UI를 만드는 것도 지속적인 방법 X
+- 포스트맨을 이용하면 간단히 RESTful API를 테스트 ㅎ ㅏㄹ 수 있 음
