@@ -183,3 +183,33 @@ JpaRepository는 기본적인 데이터베이스 오퍼레이션 인터페이스
 4) 그렇다면 기본적으로 제공해주는 쿼리가 아닌 쿼리는 어떻게 작성할까?
 4-1) TodoRepository에서 findByUserId 라는 메서드 작성
 4-2) @Query를 이용한 쿼리 메서드 작성
+
+-----------------------------------------
+2.3
+Logger 설정
+: 디버깅을 위한 로그 설정으로 Slf4j 로그 라이브러리 사용
+
+2.3.1 Create Todo 구현
+1) 퍼시스턴스 구현
+- 이미 구현한 TodoRepository 사용
+
+2) 서비스 구현
+create 메서드 작성
+- 검증(validation) : 넘어온 엔티티가 유효한지 검사하는 로직
+- sava() : 엔티티를 데이터베이스에 저장하고 로그를 남긴다.
+- findByUserId() : 저장된 엔티티를 포함하는 새 리스트를 리턴한다.
+
+3) 컨트롤러 구현
+컨트롤러는 사용자에게서 TodoDTO를 요청 바디로 넘겨받고, 이를 TodoEntity로 변환해 저장해야 한다.
+또 TodoService의 create()가 리턴하는 TodoEntity를 TodoDTO로 변환해 리턴해야 한다.
+
+3-1) TodoDTO, toEntity 메서드 작성
+
+3-2) TodoController - createTodo
+
+3-3) 테스팅
+{
+    "title" : "새포스트 1"
+}
+
+* GET 요청 / POST 요청 잘 구분하자 *
