@@ -113,5 +113,29 @@ REST는 HTTP와 다르다. REST는 HTTP를 이용해 구현하기 쉽고 대부�
 HTTP는 REST 아키텍처를 구현할 때 사용하면 쉬운 프로토콜이다.
 
 ---------------------------------------------------------
+2.2.4 컨트롤러 레이어: 스프링 REST API 컨트롤러
+HTTP는 GET/POST/PUT/DELETE/OPTIONS 등과 같은 메서드와 URI를 이용해 서버에 HTTP 요청을 보낼 수 있다.
+그렇다면 서버는 이 요청을 받은 후 어떻게 처리해야 할까?
+
+@RestControlloer
+: 해당 컨트롤러가 RestController임을 명시. http와 관련된 코드 및 요청/응답 매핑르 스프링이 알아서 해준다.
+
+@GetMapping
+: 해당 메소드의 리소스와 HTTP 메서드를 지정. 클라이언트가 이 리소스에 대해 Get 메서드로 요청하면 @GetMapping에 연결된 컨트롤러가 실행.
 
 
+- 매개변수를 넘겨받는 방법
+@PathVariable
+: URL 파라미터(/{id})로 넘어오는 값을 변수로 받을 수 있다.
+
+@RequestParam
+: 쿼리스트링 형태로 값을 변수로 받을 수 있음
+
+@RequsetBody
+: 반환하고자 하는 리소스가 복잡할 때 사용(오브젝트처럼 복잡한 자료형)
+
+@ResponseBody
+: @RestController의 내부를 들여다보면 크게 두 어노테이션의 조합으로 이뤄져 있다.
+1) @Controller
+2) @ResponseBody
+: 이 클래스의 메서드가 리턴하는 것은 웹서비스의 ResponseBody라는 뜻. 메서드가 리턴할 때 스프링은 리턴된 오브젝트를 JSON의 형태로 바꾸고 HttpResponse에 담아 반환
