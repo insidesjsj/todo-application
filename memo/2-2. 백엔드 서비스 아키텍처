@@ -270,3 +270,13 @@ ResponseDTO<TodoDTO> response = ResponseDTO.<TodoDTO>builder().data(dtos).build(
 이렇게 생성된 response 객체는 클라이언트에게 반환될 응답을 나타내는 객체입니다.
 
 -------------------------------------------------------------
+2.3.4 Delete Todo 구현
+
+1) 퍼시스턴스 구현
+- TodoRepository 사용. delete(), findByUserId() 메서드 사용
+
+2) 서비스 구현
+
+3) 컨트롤러 구현
+
+4) 테스팅
