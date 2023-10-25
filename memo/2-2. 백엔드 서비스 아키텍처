@@ -213,3 +213,16 @@ create 메서드 작성
 }
 
 * GET 요청 / POST 요청 잘 구분하자 *
+
+----------------------------------------------
+2.3.2. Retrieve Todo 구현
+: Todo 리스트를 검색하는 리포지터리, 서비스, 컨트롤러를 구현
+
+1) 퍼시스턴스 구현
+- 이미 작성한 TodoRepository에서 findByUserId() 메서드 사용
+
+2) 서비스 구현
+- repository에서 findByUserId를 호출하는 retrieve 메서드를 작성
+
+3) 컨트롤러 구현
+- 새로운 GET 메서드 생성
