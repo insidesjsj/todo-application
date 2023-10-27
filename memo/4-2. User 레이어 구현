@@ -1,0 +1,28 @@
+4.2 User 레이어 구현
+실습 내용
+- UserEntity 구현
+- UserRepository 구현
+- UserSevice 구현
+- UserDTO/UserController 구현
+
+사용자를 관리하려면 사용자에 관련된 모델, 서비스, 리포지터리, 컨트롤러가 필요
+
+4.2.1 UserEntity
+
+4.2.2 UserRepository.java
+- findByEmail(String email);
+- existsByEmail(String email);
+- findByEmailAndPassword(String email, String password);
+
+4.2.3 UserService.java
+- create()
+- getByCredentials()
+생성
+
+4.2.4 UserController.java
+: 현재 사용자를 가져오는 기능과 레지스터 기능을 구현
+1) UserDTO 구현
+
+2) UserController 구현
+- 회원가입 기능을 하는 registerUser() 메소드 구현
+- 로그인 기능을 하는 authenticate() 메소드 구현
