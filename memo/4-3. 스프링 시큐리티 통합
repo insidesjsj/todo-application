@@ -56,3 +56,15 @@ SecurityContext는 SecurityContextHolder의 createEmptyContext() 메서드를 �
 생성한 컨텍스트에 인증 정보인 authentication을 넣고 SecurityContextHolder에 컨텍스트로 등록
 SecurityContextHolder는 기본적으로 ThreadLocal에 저장
 ThreadLocal에 저장되므로 Thread마다 하나의 컨텍스트를 관리할 수 있으며 같은 스레드 내라면 어디에서든 접근 가능
+
+
+4.3.4 스프링 시큐리티 설정
+서블릿 필터를 사용하려면 해야 할 일 두가지
+[1] 서블릿 필터 구현(4.3.3에서 했음)
+[2] 서블릿 컨테이너에 이 서블릿 필터를 사용하라고 알려주는 설정 작업
+: 4.3.4에서는 바로 이 설정 작업을 한다.
+=> 스프링 시큐리티에 JwtAuthenticationFilter를 사용하라고 알려줘야 함.
+
+
+1) Config 패키지 아래에 WebSecurityConfig 생성후 WebSecurityConfigurerAdapter를 상속하는 클래스를 작성
+HttpSecurity : 시큐리티 설정을 위한 오브젝트. cors, csrf, httpBasic, session, authorizeRequests 등 다양할 설정 가능
