@@ -22,3 +22,37 @@ build.gradle에서 jjwt 라이브러리 추가
 : TokenProvider를 이용해 토큰을 생성한 후 UserDTO에 이를 반환
 
 5) 테스팅
+
+
+4.3.2 스프링 시큐리티와 서블릿 필터
+API가 실행될 때마다 사용자를 인증해 주는 부분을 구현
+- 스프링 시큐리티란 아주 간단히 말하면 서블릿 필터의 집합.
+
+서블릿 필터
+: 서블릿 실행 전에 실행되는 클래스들(다시 말해 스프링이 구현하는 디스패처 서블릿이 실해되기 전에 항상 실행된다.)
+
+- 개발자는 서블릿 필터를 구현하고 서블릿 필터를 서블릿 컨테이너가 실행하도록 설정
+- 구현된 로직에 따라 원하지 않는 HTTP 요청을 걸러낼 수 있음.
+- 살아남은 HTTP 요청은 디스패처 서블릿으로 넘어와 컨트롤러에서 실행.
+- HttpFilter or Filter를 상속하는 클래스
+
+
+4.3.3 JWT를 이용한 인증 구현
+
+1) 스프링 디펜던시 build.gradle에 추가
+: spring-boot-starter-security
+
+2) OncePerRequestFlter를 상속하는 JwtAuthenticationFilter를 구현
+: 인증 부분만 구현하고 유효 시간 검사는 생략. 로직 구현해보자
+
+2-1) 요청의 헤더에서 Bearer 토큰을 가져온다. 이 작업은 parseBearerToken() 메서드에서 이루어진다.
+
+2-2) TokenProvider를 이용해 토큰을 인증하고 UsernamePasswordAuthenticationToken을 작성
+- 이 오브젝트에 사용자의 인증 정보를 저장하고 SecurityContext에 인증된 사용자를 등록
+Why?) 요청을 처리하는 과정에서 사용자가 인증됐는지의 여부나 인증된 사용자가 누군지 알아야 할 때가 있음
+
+
+SecurityContext는 SecurityContextHolder의 createEmptyContext() 메서드를 이용해 생성
+생성한 컨텍스트에 인증 정보인 authentication을 넣고 SecurityContextHolder에 컨텍스트로 등록
+SecurityContextHolder는 기본적으로 ThreadLocal에 저장
+ThreadLocal에 저장되므로 Thread마다 하나의 컨텍스트를 관리할 수 있으며 같은 스레드 내라면 어디에서든 접근 가능
