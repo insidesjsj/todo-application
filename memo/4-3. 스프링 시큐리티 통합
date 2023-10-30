@@ -57,7 +57,7 @@ SecurityContext는 SecurityContextHolder의 createEmptyContext() 메서드를 �
 SecurityContextHolder는 기본적으로 ThreadLocal에 저장
 ThreadLocal에 저장되므로 Thread마다 하나의 컨텍스트를 관리할 수 있으며 같은 스레드 내라면 어디에서든 접근 가능
 
-
+-----------------------------------------------------------------------------------------------
 4.3.4 스프링 시큐리티 설정
 서블릿 필터를 사용하려면 해야 할 일 두가지
 [1] 서블릿 필터 구현(4.3.3에서 했음)
@@ -70,3 +70,18 @@ ThreadLocal에 저장되므로 Thread마다 하나의 컨텍스트를 관리할 
 HttpSecurity : 시큐리티 설정을 위한 오브젝트. cors, csrf, httpBasic, session, authorizeRequests 등 다양할 설정 가능
 
 2) 책에 나온 방식대로 할 경우 WebSecurityConfigurerAdapter가 deprecated 되었기 때문에 제거 코드로 바꿔줘야 한다.
+
+----------------------------------------------------------------------------------------------------
+4.3.5 TodoController에서 인증된 사용자 사용하기
+TodoController의 메서드를 보면 인증이 없던 시절 임시로 저장해놨던 사용자 아이디를 아직도 사용 하고 있음.
+이제 이 메서드들이 인증된 사용자 아이디를 사용할 수 있도록 각 메서드에 userId 매개변수를 추가
+
+@AuthenticationPrincipal
+- userId는 누가 어떻게 넘겨주는 것인가?
+- 해답은 JwtAuthenticationFilter 클래스에 있다.
+- JwtAuthenticationFilter에서 UsernamePasswordAuthenticationToken를 생성했다.
+=> 이 때 생성자의 첫 매개변수로 넣은 것이 "AuthenticationPrincipal", 그리고 String 형의 userId를 넣었다.
+- 또 이 오브젝트를 Security에 등록했다.
+- 스프링은 컨트롤러 메서드를 부를 때 @AuthenticationPrincipal이 있다는 것을 안다.
+- 그래서 SecurityContext에서 SecurityContext::Authentication, 즉 UsernamePasswordAuthenticationToken 오브젝트를 가져온다.
+- 그리고 이 오브젝트에서 AuthenticationPrincipal를 컨트롤러 메서드에 넘겨준다.
