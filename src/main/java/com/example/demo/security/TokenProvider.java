@@ -16,7 +16,6 @@ import java.util.Date;
 public class TokenProvider {
     private static final String SECRET_KEY = "NMA8JPctFuna59f5";
 
-    // JWT 라이브러리를 이용해 JWT 토큰을 생성
     public String create(UserEntity userEntity) {
         // 기한 지금으로부터 1일로 설정
         Date expiryDate = Date.from(
@@ -48,10 +47,9 @@ public class TokenProvider {
                 .compact();
     }
 
-    // 토큰을 디코딩 및 파싱하고 토큰의 위조 여부를 확인. 이후 우리가 원하는 subject, 즉 사용자의 아이디를 리턴
     public String validateAndGetUserId(String token) {
         // parseClaimsJws메서드가 Base 64로 디코딩 및 파싱.
-        // 즉, 헤더와 페이로드를 setSigningKey로 넘어온 시크릿을 이용해 서명 후, token의 서명 과 비교.
+        // 즉, 헤더와 페이로드를 setSigningKey로 넘어온 시크릿을 이용 해 서명 후, token의 서명 과 비교.
         // 위조되지 않았다면 페이로드(Claims) 리턴
         // 그 중 우리는 userId가 필요하므로 getBody를 부른다.
         Claims claims = Jwts.parser()

@@ -85,3 +85,16 @@ TodoController의 메서드를 보면 인증이 없던 시절 임시로 저장�
 - 스프링은 컨트롤러 메서드를 부를 때 @AuthenticationPrincipal이 있다는 것을 안다.
 - 그래서 SecurityContext에서 SecurityContext::Authentication, 즉 UsernamePasswordAuthenticationToken 오브젝트를 가져온다.
 - 그리고 이 오브젝트에서 AuthenticationPrincipal를 컨트롤러 메서드에 넘겨준다.
+
+-----------------------------------------------------------------------
+4.3.6 패스워드 암호화
+: BCryptPasswordEncoder 사용
+
+1) UserService 수정
+- 보통 암호화된 패스워드를 비교해야 하는 경우 사용자에게 받은 패스워드를 같은 방법으로 암호화한 후 그 결과를 데이터베이스 값과 비교하는 것이 자연스러운 생각
+- 그러나 책에서는 matches() 메서드 사용
+: BCryptPasswordEncoder는 같은 값을 인코딩하더라도 할 때마다 값이 다르고 패스워드에 랜덤하게 의미없는 값을 붙여 결과를 생성하기 때문
+(이런 의미 없는 값을 보안 용어로 Salt라고 하고 Salt를 붙여 인코딩하는 것을 Salting이라고 한다.)
+- matches() 메서드는 Salt를 고려해 두 값을 비교한다.
+
+2) UserController 수정

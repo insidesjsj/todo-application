@@ -63,7 +63,7 @@ public class TodoController {
 
     @GetMapping
     public ResponseEntity<?> retrieveTodoList(@AuthenticationPrincipal String userId) {
-
+        log.info("asdasd");
         // (1) 서비스 retrieve() 메서드를 사용해 Todo리스트를 가져온다.
         List<TodoEntity> entities = service.retrieve(userId);
 
